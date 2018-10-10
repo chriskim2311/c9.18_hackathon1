@@ -133,7 +133,7 @@ function checkPossibleMoves() {
 }
 
 function findOppositeColor() {
-
+       
 }
 
 function makeMove() {
