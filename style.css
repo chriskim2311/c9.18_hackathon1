@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+
+
+container {
+    position: relative;
+    background-color: saddlebrown;
+    left: 50%;
+    height: 100%;
+    width: 70%;
+}
+
+gameboard {
+    position: relative;
+    background-color: black;
+}
+
