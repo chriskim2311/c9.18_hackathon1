@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-    <div class="Title">Reversi</div>
+    <div class="flex-title">Reversi Game</div>
 </header>
 
 <div class="gameArea">
@@ -91,20 +91,29 @@
             </div>
         </div>
 
-        <div class="playerArea"></div>
+        <div class="playerArea">
             <div class="player1" id="black">
                 <div class="color">Black</div>
-                <div class="value"></div>
+
                 <div class="player">Player 1</div>
             </div>
-            <div img=""></div>
-            <div img=""></div>
+            <div class="value1">
+                <div class="count">0</div>
+            </div>
+            <div class="playerIndicator1">
+                <img class="arrow1" src="images/arrow-left.jpg">
+            </div>
+            <div class="playerIndicator2">
+                <img class="arrow2" src="images/arrow-right.jpg">
+            </div>
 
 
             <div class="player2" id="white">
                 <div class="color">White</div>
-                <div class="value"></div>
                 <div class="player">Player 2</div>
+            </div>
+            <div class="value2">
+                <div class="count">0</div>
             </div>
             <button class="reset">Reset Game</button>
         </div>
