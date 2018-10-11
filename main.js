@@ -2,13 +2,13 @@ $(document).ready(initializeApp);
 
 function initializeApp(){
     makeBoardArray();
-    checkPossibleMoves();
     findOppositeColor();
+    checkPossibleMoves();
 
 }
 var playerBlack = true;
 var gameBoardArray = [];
-
+var currentDiscs = [];
 
 
 
@@ -18,19 +18,17 @@ function makeBoardArray(){
     for(var rowIndex=0; rowIndex < row.length; rowIndex++){
         var container = $(row[rowIndex]).find(".container");
         gameBoardArray.push(container);
+        console.log(gameBoardArray)
     }
 }
 
 
 function findOppositeColor() {
-
-    var currentDiscs = [];
-
-    for(i = 0; i < gameBoardArray.length; i++) {
-        for(j = 0; j < gameBoardArray.length; j++ ) {
+    for(var yIndex = 0; yIndex < gameBoardArray.length; yIndex++) {
+        for(var xIndex = 0; xIndex < gameBoardArray.length; xIndex++ ) {
             if (playerBlack === true) {
-                if(gameBoardArray[i][j] === $(".container").class('white')) {
-                    currentDiscs.push(gameBoardArray[i][j])
+                if(gameBoardArray[yIndex][xIndex] === $(".container").hasClass('white')) {
+                    currentDiscs.push(gameBoardArray[yIndex][xIndex])
                 }
                 else {
                     continue;
@@ -38,16 +36,19 @@ function findOppositeColor() {
             }
 
             if (playerBlack === false) {
-                if(gameBoardArray[i][j] === $(".container").class('black')) {
-                    currentDiscs.push(gameBoardArray[i][j])
+                if(gameBoardArray[yIndex][xIndex] === $(".container").hasClass('black')) {
+                    currentDiscs.push(gameBoardArray[yIndex][xIndex])
                 }
                 else {
                     continue;
                 }
 
             }
-        }
-    } return currentDiscs;
+        } return currentDiscs;
+    }
+
+    console.log(currentDiscs)
+
 }
 
 function checkPossibleMoves(currentDiscs, playerBlack) {
@@ -66,12 +67,13 @@ function checkPossibleMoves(currentDiscs, playerBlack) {
             // $('div[row='+ cordX +'][col=' + cordY +']')
 
             var cordXY = [cordX][cordY];
-            if(cordXY === !$(".container").class('white') && !$(".container").class('black') {
+            if(cordXY === !$(".container").class('white') && !$(".container").class('black')) {
                 neighborCells.push(cordXY)
             }
                 }
         }
     }
+    console.log(neighborCells)
 }
 
 
