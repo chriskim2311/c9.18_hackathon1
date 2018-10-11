@@ -26,39 +26,32 @@ function makeBoardArray(){
 function findOppositeColor() {
     for(var yIndex = 0; yIndex < gameBoardArray.length; yIndex++) {
         for(var xIndex = 0; xIndex < gameBoardArray.length; xIndex++ ) {
-            if (playerBlack === true) {
-                if(gameBoardArray[yIndex][xIndex] === $(".container").hasClass('white')) {
-                    currentDiscs.push(gameBoardArray[yIndex][xIndex])
+            if (playerBlack) {
+                if($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('white')) {
+                    var discCoordinates = [yIndex,xIndex];
+                    currentDiscs.push(discCoordinates);
                 }
-                else {
-                    continue;
+            } else {
+                if($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('black')) {
+                    currentDiscs.push([yIndex],[xIndex])
                 }
             }
-
-            if (playerBlack === false) {
-                if(gameBoardArray[yIndex][xIndex] === $(".container").hasClass('black')) {
-                    currentDiscs.push(gameBoardArray[yIndex][xIndex])
-                }
-                else {
-                    continue;
-                }
-
-            }
-        } return currentDiscs;
+        }
     }
-
     console.log(currentDiscs)
+    // return currentDiscs;
+
 
 }
 
-function checkPossibleMoves(currentDiscs, playerBlack) {
+function checkPossibleMoves(currentDiscArray, player) {
     var neighborCells = [];
         // var selectedSquare = event.currentTarget;
 
     for(i = 0; i < currentDiscs.length; i++){
         var discPosition = currentDiscs[i];
-        var coordinateY = parseInt(discPosition.charAt(1));
-        var coordinateX = parseInt(discPosition.charAt(0));
+        var coordinateY = parseInt(discPosition.charAt(0));
+        var coordinateX = parseInt(discPosition.charAt(1));
 
             for(y = -1; y < 2; y++){
                 for (x = -1; x < 2; x++){
