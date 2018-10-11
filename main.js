@@ -11,6 +11,7 @@ var gameBoardArray = [];
 var currentDiscs = [];
 var neighborCells = [];
 var directionArray = [[-1,-1], [1,1], [1,0], [-1,0], [0,-1], [0,1], [-1,1], [1,-1]];
+var validCells = [];
 
 
 function makeBoardArray(){
@@ -47,52 +48,91 @@ function findOppositeColor() {
 }
 
 function checkPossibleMoves(currentDiscArray, player) {
-        // var selectedSquare = event.currentTarget;
+    // var selectedSquare = event.currentTarget;
 
-    for(i = 0; i < currentDiscs.length; i++){
+    for (i = 0; i < currentDiscs.length; i++) {
         var discPosition = currentDiscs[i];
 
         var coordinateY = parseInt(discPosition[0]);
         var coordinateX = parseInt(discPosition[1]);
 
-            for(y = -1; y < 2; y++){
-                for (x = -1; x < 2; x++){
-            var cordY = coordinateY + (y);
-            var cordX = coordinateX + (x);
+        for (y = -1; y < 2; y++) {
+            for (x = -1; x < 2; x++) {
+                var cordY = coordinateY + (y);
+                var cordX = coordinateX + (x);
 
-            console.log('cordY:', cordY)
-                    console.log('cordx:', cordX)
-            // $('div[row='+ cordX +'][col=' + cordY +']')
-            if(!$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') && !$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black')) {
-                var neighborCoordinates = [cordY, cordX];
-                neighborCells.push(neighborCoordinates)
-            }
-
+                console.log('cordY:', cordY)
+                console.log('cordx:', cordX)
+                // $('div[row='+ cordX +'][col=' + cordY +']')
+                if (!$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') && !$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black')) {
+                    var neighborCoordinates = [cordY, cordX];
+                    neighborCells.push(neighborCoordinates)
                 }
+
+            }
         }
     }
 
 
-    for(i = 0; i < neighborCells.length; i++) {
+    for (i = 0; i < neighborCells.length; i++) {
         var potentialPosition = neighborCells[i];
 
-        var discCoordinateY = parseInt(discPosition[0]);
-        var discCoordinateX = parseInt(discPosition[1]);
+        var discCoordinateY = parseInt(potentialPosition[0]);
+        var discCoordinateX = parseInt(potentialPosition[1]);
 
-        for(j = 0; j < directionArray.length; j++) {
-            var directions = directionArray[j];
+        // for(var directionChangeY = 0; directionChangeY < directionArray.length; directionChangeY++) {
+        //     for(var directionChangeX = 0; directionChangeX < directionArray.length; directionChangeX++)
+        //     var directions = directionArray[directionChangeY][directionChangeX];
+        for (y = -1; y < 2; y++) {
+            for (x = -1; x < 2; x++) {
+                var cordY = discCoordinateY + (y);
+                var cordX = discCoordinateX + (x);
 
+
+                if (playerBlack) {
+                    if (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
+                        if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') === true) {
+                            var newCordY = cordY + (y);
+                            var newCordX = cordX + (x);
+
+                            if (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
+                                if ($(gameBoardArray[newCordY][newCordX]).find(".disc").hasClass('black') === true) {
+                                    var validCoordinates = [discCoordinateY, discCoordinateX];
+                                    validCells.push(validCoordinates);
+                                    $(gameBoardArray[discCoordinateY][discCoordinateX]).addClass('highlight');
+                                    console.log(validCells)
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
+                        if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black') === true) {
+                            var newCordY = cordY + (y);
+                            var newCordX = cordX + (x);
+
+                            if (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
+                                if ($(gameBoardArray[newCordY][newCordX]).find(".disc").hasClass('white') === true) {
+                                    var validCoordinates = [discCoordinateY, discCoordinateX];
+                                    validCells.push(validCoordinates);
+                                    $(gameBoardArray[discCoordinateY][discCoordinateX]).addClass('highlight');
+                                    console.log(validCells)
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
     }
-    
-
-
-
-
-    console.log(neighborCells)
 }
-
 
 
 function makeMove() {
