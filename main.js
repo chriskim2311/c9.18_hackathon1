@@ -127,6 +127,7 @@ function checkPossibleMoves(currentDiscs, currentPlayer) {
 }
 
 function findOppositeColor() {
+
     var currentDiscs = [];
 
     for(i = 0; i < gameBoardArray.length; i++) {
