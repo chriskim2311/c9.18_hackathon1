@@ -1,16 +1,18 @@
-$(document).ready(buildGameBoard);
+$(document).ready(initializeApp);
 
-function buildGameBoard(){
+function initializeApp(){
+    makeBoardArray();
+    checkPossibleMoves();
+    findOppositeColor();
+
+}
+
+function makeBoardArray(){
     console.log('game board');
-    var boardSize = {row: 8, column: 8};
-    var game_Board = $('.gameBoard');
-    for(var rowIndex=0; rowIndex < 8; rowIndex++){
-        var row = $('<div>').addClass('disc');
-        $("body").append(row);
-        for(var columnIndex=0; columnIndex < 8; columnIndex++){
-            var column = $("<div>").addClass("disc");
-            row.append(column);
-        }
+    var row = $(".row");
+    for(var rowIndex=0; rowIndex < row.length; rowIndex++){
+        var container = $(row[rowIndex]).find(".container");
+        gameBoardArray.push(container);
     }
 }
 
