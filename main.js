@@ -4,7 +4,6 @@ function initializeApp(){
     makeBoardArray();
     findOppositeColor();
     checkPossibleMoves();
-    winCondition();
 
 }
 var playerBlack = true;
