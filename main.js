@@ -4,6 +4,7 @@ function initializeApp(){
     makeBoardArray();
     findOppositeColor();
     checkPossibleMoves();
+    winCondition();
 
 }
 var playerBlack = true;
@@ -107,8 +108,16 @@ function playerTurn() {
 }
 
 function winCondition() {
+    var blackCells = $(".black").length;
+    var whiteCells = $(".white").length;
+    if(blackCells > whiteCells){
+        alert("Player B Wins!");
+    }else{
+        alert("Player W Wins!");
+    }
 
 }
+
 function gameReset() {
 
 }
