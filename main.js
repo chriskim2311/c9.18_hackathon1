@@ -9,7 +9,8 @@ function initializeApp(){
 var playerBlack = true;
 var gameBoardArray = [];
 var currentDiscs = [];
-
+var neighborCells = [];
+var directionArray = [[-1,-1], [1,1], [1,0], [-1,0], [0,-1], [0,1], [-1,1], [1,-1]];
 
 
 function makeBoardArray(){
@@ -33,7 +34,8 @@ function findOppositeColor() {
                 }
             } else {
                 if($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('black')) {
-                    currentDiscs.push([yIndex],[xIndex])
+                    var discCoordinates = [yIndex,xIndex];
+                    currentDiscs.push(discCoordinates)
                 }
             }
         }
@@ -45,27 +47,49 @@ function findOppositeColor() {
 }
 
 function checkPossibleMoves(currentDiscArray, player) {
-    var neighborCells = [];
         // var selectedSquare = event.currentTarget;
 
     for(i = 0; i < currentDiscs.length; i++){
         var discPosition = currentDiscs[i];
-        var coordinateY = parseInt(discPosition.charAt(0));
-        var coordinateX = parseInt(discPosition.charAt(1));
+
+        var coordinateY = parseInt(discPosition[0]);
+        var coordinateX = parseInt(discPosition[1]);
 
             for(y = -1; y < 2; y++){
                 for (x = -1; x < 2; x++){
             var cordY = coordinateY + (y);
             var cordX = coordinateX + (x);
-            // $('div[row='+ cordX +'][col=' + cordY +']')
 
-            var cordXY = [cordX][cordY];
-            if(cordXY === !$(".container").class('white') && !$(".container").class('black')) {
-                neighborCells.push(cordXY)
+            console.log('cordY:', cordY)
+                    console.log('cordx:', cordX)
+            // $('div[row='+ cordX +'][col=' + cordY +']')
+            if(!$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') && !$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black')) {
+                var neighborCoordinates = [cordY, cordX];
+                neighborCells.push(neighborCoordinates)
             }
+
                 }
         }
     }
+
+
+    for(i = 0; i < neighborCells.length; i++) {
+        var potentialPosition = neighborCells[i];
+
+        var discCoordinateY = parseInt(discPosition[0]);
+        var discCoordinateX = parseInt(discPosition[1]);
+
+        for(j = 0; j < directionArray.length; j++) {
+            var directions = directionArray[j];
+
+        }
+
+    }
+    
+
+
+
+
     console.log(neighborCells)
 }
 
