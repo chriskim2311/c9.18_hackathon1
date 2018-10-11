@@ -97,43 +97,60 @@
 
 
 
-gameBoardArray = [
-            [[0,0],[0,1], [0,2], [0,3], [0,4], [0,5], [0,6], [0,7]],
-            [[1,0],[1,1], [1,2], [1,3], [1,4], [1,5], [1,6], [1,7]],
-            [[2,0],[2,1], [2,2], [2,3], [2,4], [2,5], [2,6], [2,7]],
-            [[3,0],[3,1], [3,2], [3,3], [3,4], [3,5], [3,6], [3,7]],
-            [[4,0],[4,1], [4,2], [4,3], [4,4], [4,5], [4,6], [4,7]],
-            [[5,0],[5,1], [5,2], [5,3], [5,4], [5,5], [5,6], [5,7]],
-            [[6,0],[6,1], [6,2], [6,3], [6,4], [6,5], [6,6], [6,7]],
-            [[7,0],[7,1], [7,2], [7,3], [7,4], [7,5], [7,6], [7,7]]
-]
-function checkPossibleMoves() {
-        var selectedSquare = event.currentTarget;
+var currentPlayer = black;
+var gameBoardArray = [];
 
-    for(y = -1; y < 2; y++){
-        for (x = -1; x < 2; x++){
-            var coordinateY = parseInt(selectedSquare.charAt(1));
-            var coordinateX = parseInt(selectedSquare.charAt(0));
 
-            var cordY = coordinateY+ (y);
+
+function checkPossibleMoves(currentDiscs, currentPlayer) {
+    var neighborCells = [];
+        // var selectedSquare = event.currentTarget;
+
+    for(i = 0; i < currentDiscs.length; i++){
+        var discPosition = currentDiscs[i];
+        var coordinateY = parseInt(discPosition.charAt(1));
+        var coordinateX = parseInt(discPosition.charAt(0));
+
+            for(y = -1; y < 2; y++){
+                for (x = -1; x < 2; x++){
+            var cordY = coordinateY + (y);
             var cordX = coordinateX + (x);
-            var cordXY =$('div[row='+ cordX +'][col=' + cordY +']');
+            // $('div[row='+ cordX +'][col=' + cordY +']')
 
-            if(cordXY === black) {
-
+            var cordXY = [cordX][cordY];
+            if(cordXY === !$(".container").class('white') && !$(".container").class('black') {
+                neighborCells.push(cordXY)
             }
-
-            if(cordXY === white) {
-
-            }
-
-
+                }
         }
     }
 }
 
 function findOppositeColor() {
+    var currentDiscs = [];
 
+    for(i = 0; i < gameBoardArray.length; i++) {
+        for(j = 0; j < gameBoardArray.length; j++ ) {
+            if (currentPlayer === black) {
+                if(gameBoardArray[i][j] === $(".container").class('white')) {
+                    currentDiscs.push(gameBoardArray[i][j])
+                }
+                else {
+                    continue
+                }
+            }
+
+            if (currentPlayer === white) {
+                if(gameBoardArray[i][j] === $(".container").class('black')) {
+                    currentDiscs.push(gameBoardArray[i][j])
+                }
+                else {
+                    continue
+                }
+
+            }
+        }
+    } return currentDiscs;
 }
 
 function makeMove() {
