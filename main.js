@@ -4,6 +4,12 @@ function initializeApp(){
     makeBoardArray();
     findOppositeColor();
     checkPossibleMoves();
+    defaultPieces();
+    defineWin();
+    displayCurrentPlayer();
+    totalDiscCount();
+    applyClickHandler()
+
 
 }
 var playerBlack = true;
@@ -158,7 +164,45 @@ function winCondition() {
 }
 
 function gameReset() {
-
+    $(".container").removeClass("white black highlight")
+    defaultPieces();
+    $(".value1 > count").text("0");
+    $(".value2 > count").text("0");
 }
 
-function
+function totalDiscCount(){
+    var blackCells = $(".black").length;
+    var whiteCells = $(".white").length;
+    $(".value1 > .count").text(blackCells);
+    $(".value2 > .count").text(whiteCells);
+}
+
+function applyClickHandler(){
+    $(".container").click(selectValidMove)
+    $(".reset").click(gameReset)
+}
+
+function defaultPieces() {
+    $('div[row=3][col=3]').addClass("white");
+    $('div[row=3][col=4]').addClass("black");
+    $('div[row=4][col=3]').addClass("black");
+    $('div[row=4][col=4]').addClass("white");
+}
+
+function defineWin (){
+    var blackCells = $(".black").length;
+    var whiteCells = $(".white").length;
+    if(blackCells + whiteCells === 64){
+        winCondition();
+    }
+}
+
+function displayCurrentPlayer() {
+    if (playerBlack) {
+        $(".playerIndicator1").show("blackTurn");
+        $(".playerIndicator2").hide("whiteTurn")
+    } else {
+        $(".playerIndicator2").show("whiteTurn");
+        $(".playerIndicator2").hide("blackTurn")
+    }
+}
