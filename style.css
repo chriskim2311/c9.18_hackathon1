@@ -8,14 +8,13 @@ body {
     font-size: 0;
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-image: url("images/background2.jpg");
 }
 
 header {
-    background-color: darkblue;
     font-family: "Comic Sans MS";
     width: 100%;
-    height: 15%;
+    height: 10%;
     font-size: 4em;
     color: white;
     font-weight: bold;
@@ -37,16 +36,12 @@ header {
     margin: 0 auto;
     font-size: 1rem;
     width: 55%;
-    height: 70%;
-    top: 5%;
-    border: 5px solid white;
+    height: 80%;
+    top: 2%;
     box-sizing: border-box;
-    background-color: white;
 }
 
 .gameBoard {
-    position: relative;
-    background-color: white;
     width: 100%;
     height: 85%;
 }
@@ -54,7 +49,6 @@ header {
 .row {
     width: 100%;
     height: 12.5%;
-    background: black;
     float: left;
 }
 
@@ -94,8 +88,6 @@ header {
     height: 15%;
     position: relative;
     display: inline-block;
-    border-top: 5px solid white;
-    background-color: white;
     box-sizing: border-box;
 }
 
@@ -104,8 +96,18 @@ header {
     width: 30%;
     display: inline-block;
     float: left;
-    top: 5%;
     left: 2%;
+    color: white;
+    position: relative;
+    text-align: center;
+}
+
+.player2 {
+    height: 100%;
+    width: 30%;
+    float: right;
+    right: 11%;
+    color: white;
     position: relative;
     text-align: center;
 }
@@ -119,24 +121,19 @@ header {
 
 .player {
     font-family: Calibri;
-    height: 30%;
+    height: 20%;
     font-size: 2vw;
+    bottom: 8%;
+    position: relative;
 }
 
-.player2 {
-    height: 100%;
-    width: 30%;
-    float: right;
-    top: 5%;
-    right: 11%;
-    position: relative;
-    text-align: center;
-}
+
 
 button {
     position: relative;
     display: inline-block;
-    left: 45%;
+    left: 77%;
+    vertical-align: top;
 
 }
 
@@ -147,6 +144,7 @@ button {
     left: 2%;
     position: relative;
     display: inline-block;
+    vertical-align: top;
 }
 
 .whiteTurn {
@@ -156,6 +154,7 @@ button {
     left: 2%;
     position: relative;
     display: inline-block;
+    vertical-align: top;
 }
 
 img {
@@ -169,6 +168,7 @@ img {
     display: inline-block;
     position: relative;
     top: 5%;
+    color: white;
     vertical-align: top;
     right: 4%;
 }
@@ -180,6 +180,7 @@ img {
     position: relative;
     top: 5%;
     left: 25%;
+    color: white;
     vertical-align: top;
 }
 

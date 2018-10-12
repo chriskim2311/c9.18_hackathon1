@@ -1,185 +1,137 @@
 $(document).ready(initializeApp);
 
-function initializeApp(){
+function initializeApp() {
     makeBoardArray();
+    defaultPieces();
     findOppositeColor();
     checkPossibleMoves();
-    defaultPieces();
     defineWin();
     displayCurrentPlayer();
     totalDiscCount();
-    applyClickHandler()
-
-
+    applyClickHandler();
 }
+
+function applyClickHandler() {
+    $(".reset").click(gameReset)
+}
+
 var playerBlack = true;
 var gameBoardArray = [];
 var currentDiscs = [];
 var neighborCells = [];
-var directionArray = [[-1,-1], [1,1], [1,0], [-1,0], [0,-1], [0,1], [-1,1], [1,-1]];
 var validCells = [];
 
 
-function makeBoardArray(){
-    console.log('game board');
+function makeBoardArray() {
     var row = $(".row");
-    for(var rowIndex=0; rowIndex < row.length; rowIndex++){
+    for (var rowIndex = 0; rowIndex < row.length; rowIndex++) {
         var container = $(row[rowIndex]).find(".container");
         gameBoardArray.push(container);
-        console.log(gameBoardArray)
     }
 }
 
-
 function findOppositeColor() {
-    for(var yIndex = 0; yIndex < gameBoardArray.length; yIndex++) {
-        for(var xIndex = 0; xIndex < gameBoardArray.length; xIndex++ ) {
+    for (var yIndex = 0; yIndex < gameBoardArray.length; yIndex++) {
+        for (var xIndex = 0; xIndex < gameBoardArray.length; xIndex++) {
             if (playerBlack) {
-                if($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('white')) {
-                    var discCoordinates = [yIndex,xIndex];
+                if ($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('white')) {
+                    var discCoordinates = [yIndex, xIndex];
                     currentDiscs.push(discCoordinates);
                 }
             } else {
-                if($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('black')) {
-                    var discCoordinates = [yIndex,xIndex];
+                if ($(gameBoardArray[yIndex][xIndex]).find(".disc").hasClass('black')) {
+                    var discCoordinates = [yIndex, xIndex];
                     currentDiscs.push(discCoordinates)
                 }
             }
         }
     }
-    console.log(currentDiscs)
-    // return currentDiscs;
-
-
 }
 
-function checkPossibleMoves(currentDiscArray, player) {
-    // var selectedSquare = event.currentTarget;
-
-    for (i = 0; i < currentDiscs.length; i++) {
+function checkPossibleMoves() {
+    for (var i = 0; i < currentDiscs.length; i++) {
         var discPosition = currentDiscs[i];
 
         var coordinateY = parseInt(discPosition[0]);
         var coordinateX = parseInt(discPosition[1]);
 
-        for (y = -1; y < 2; y++) {
-            for (x = -1; x < 2; x++) {
-                var cordY = coordinateY + (y);
-                var cordX = coordinateX + (x);
-
-                console.log('cordY:', cordY)
-                console.log('cordx:', cordX)
-                // $('div[row='+ cordX +'][col=' + cordY +']')
+        for (var column = -1; column < 2; column++) {
+            for (var row = -1; row < 2; row++) {
+                var cordY = coordinateY + (column);
+                var cordX = coordinateX + (row);
                 if (!$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') && !$(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black')) {
                     var neighborCoordinates = [cordY, cordX];
                     neighborCells.push(neighborCoordinates)
                 }
-
             }
         }
     }
 
-
-    for (i = 0; i < neighborCells.length; i++) {
+    for (var i = 0; i < neighborCells.length; i++) {
         var potentialPosition = neighborCells[i];
-
         var discCoordinateY = parseInt(potentialPosition[0]);
         var discCoordinateX = parseInt(potentialPosition[1]);
-
-        // for(var directionChangeY = 0; directionChangeY < directionArray.length; directionChangeY++) {
-        //     for(var directionChangeX = 0; directionChangeX < directionArray.length; directionChangeX++)
-        //     var directions = directionArray[directionChangeY][directionChangeX];
-        for (y = -1; y < 2; y++) {
-            for (x = -1; x < 2; x++) {
-                var cordY = discCoordinateY + (y);
-                var cordX = discCoordinateX + (x);
-
-
+        for (var column = -1; column < 2; column++) {
+            for (var row = -1; row < 2; row++) {
+                var cordY = discCoordinateY + (column);
+                var cordX = discCoordinateX + (row);
                 if (playerBlack) {
                     if (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
-                        if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') === true) {
+                        if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white')) {
                             while (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
-                                if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black') === true) {
+                                if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black')) {
                                     var validCoordinates = [discCoordinateY, discCoordinateX];
                                     validCells.push(validCoordinates);
                                     $(gameBoardArray[discCoordinateY][discCoordinateX]).addClass('highlight');
-                                    console.log(validCells)
                                 }
-                                cordY += y;
-                                cordX += x;
+                                cordY += column;
+                                cordX += row;
                             }
                         }
-
-
                     }
                 }
                 else {
                     if (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
-                            if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black') === true) {
+                        if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('black')) {
                             while (cordY > -1 && cordY < gameBoardArray.length - 1 && cordX > -1 && cordX < gameBoardArray.length - 1) {
-                                if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white') === true) {
+                                if ($(gameBoardArray[cordY][cordX]).find(".disc").hasClass('white')) {
                                     var validCoordinates = [discCoordinateY, discCoordinateX];
                                     validCells.push(validCoordinates);
                                     $(gameBoardArray[discCoordinateY][discCoordinateX]).addClass('highlight');
                                     console.log(validCells)
                                 }
-                                cordY += y;
-                                cordX += x;
+                                cordY += column;
+                                cordX += row;
                             }
                         }
-
-
                     }
                 }
-
-
             }
         }
     }
-}
-
-
-function makeMove() {
-
-}
-
-function colorFlip() {
-
-}
-function playerTurn() {
-
 }
 
 function winCondition() {
     var blackCells = $(".black").length;
     var whiteCells = $(".white").length;
-    if(blackCells > whiteCells){
+    if (blackCells > whiteCells) {
         alert("Player B Wins!");
-    }else{
+    } else {
         alert("Player W Wins!");
     }
-
 }
 
 function gameReset() {
-    $(".container").removeClass("white black highlight")
-    defaultPieces();
-    $(".value1 > count").text("0");
-    $(".value2 > count").text("0");
+    $(".container").removeClass("white black highlight");
+    initializeApp();
 }
 
-function totalDiscCount(){
+function totalDiscCount() {
     var blackCells = $(".black").length;
     var whiteCells = $(".white").length;
     $(".value1 > .count").text(blackCells);
     $(".value2 > .count").text(whiteCells);
 }
-
-function applyClickHandler(){
-    $(".container").click(selectValidMove)
-    $(".reset").click(gameReset)
-}
-
 
 function defaultPieces() {
     $('div[row=3][col=3]').addClass("white");
@@ -188,10 +140,10 @@ function defaultPieces() {
     $('div[row=4][col=4]').addClass("white");
 }
 
-function defineWin (){
+function defineWin() {
     var blackCells = $(".black").length;
     var whiteCells = $(".white").length;
-    if(blackCells + whiteCells === 64){
+    if (blackCells + whiteCells === 64) {
         winCondition();
     }
 }
@@ -199,10 +151,9 @@ function defineWin (){
 function displayCurrentPlayer() {
     if (playerBlack) {
         $(".playerIndicator1").show("blackTurn");
-        $(".playerIndicator2").hide("whiteTurn")
+        $(".arrow2").hide("arrow2")
     } else {
         $(".playerIndicator2").show("whiteTurn");
-        $(".playerIndicator2").hide("blackTurn")
+        $(".arrow1").hide("arrow1")
     }
-
 }
