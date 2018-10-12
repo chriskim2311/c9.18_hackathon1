@@ -55,10 +55,10 @@ header {
 .container {
     width: 12.5%;
     height: 100%;
-    background-color: lightblue;
+    /*opacity: 0.2;*/
+    /*background-color: lightblue;*/
     display: inline-block;
-    border: 5px solid blue;
-
+    border: 3px solid white;
     margin: 0;
     float: left;
     box-sizing: border-box;
@@ -75,11 +75,11 @@ header {
 }
 
 .black {
-    background-color: black;
+    background-color: darkslategrey;
 }
 
 .white {
-    background-color: white;
+    background-color: floralwhite;
     border: 1px solid black
 }
 
