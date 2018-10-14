@@ -2,13 +2,13 @@ $(document).ready(initializeApp);
 
 function initializeApp(){
     makeBoardArray();
+    defaultPieces();
     findOppositeColor();
     checkPossibleMoves();
-    defaultPieces();
     defineWin();
     displayCurrentPlayer();
     totalDiscCount();
-    applyClickHandler()
+    applyClickHandler();
 
 
 }
@@ -176,8 +176,8 @@ function totalDiscCount(){
 }
 
 function applyClickHandler(){
-    $(".container").click(selectValidMove)
-    $(".reset").click(gameReset)
+    //$(".container").click(selectValidMove);
+    $(".reset").click(gameReset);
 }
 
 
